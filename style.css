@@ -1,0 +1,195 @@
+/* Font self-hosted: nessun CDN, funziona offline (spec §6). */
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('./assets/fonts/source-serif-4-latin-400-normal.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('./assets/fonts/source-serif-4-latin-ext-400-normal.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('./assets/fonts/source-serif-4-latin-400-italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('./assets/fonts/source-serif-4-latin-600-normal.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('./assets/fonts/source-serif-4-latin-700-normal.woff2') format('woff2');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('./assets/fonts/plus-jakarta-sans-latin-400-normal.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('./assets/fonts/plus-jakarta-sans-latin-600-normal.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('./assets/fonts/plus-jakarta-sans-latin-700-normal.woff2') format('woff2');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* Palette (spec §6) */
+:root {
+  --paper: #faf6ee;
+  --paper-deep: #efe5cf;
+  --ink: #221a12;
+  --ink-soft: #5c5347;
+  --ink-faint: #8d8172;
+  --accent: #8c2f1b;
+  --accent-deep: #6e2313;
+  --rule: #d9cdb2;
+}
+
+.slidev-layout {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3,
+.slidev-layout em {
+  font-family: 'Source Serif 4', Georgia, serif;
+}
+
+/* Riga di testa (chapterNumber — chapterTitle) e kicker di figura:
+   paragrafo la cui prima è in grassetto. Il selettore NON deve toccare
+   i <strong> dentro le liste (badge e valori delle cifre). */
+.slidev-layout p > strong:first-child {
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--ink-soft);
+}
+
+/* Citazioni (Landes, Ure): sfondo esplicito perché il default di Slidev
+   usa --slidev-code-background, scuro in tema scuro e grigio comunque.
+   Specificità alta per vincere la regola del core a parità di selettore. */
+.slidev-layout.slidev-layout blockquote {
+  background: var(--paper-deep, #efe5cf);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 3px 3px 0;
+  padding: .6rem 1rem .6rem 1rem;
+  margin: 0;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.slidev-layout.slidev-layout blockquote p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+.slidev-layout.slidev-layout blockquote cite {
+  display: block;
+  margin-top: .5rem;
+  color: var(--ink-soft);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-style: normal;
+  font-size: .72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.slidev-layout li::marker {
+  color: var(--accent);
+}
+
+/* Spazio per il footer globale (global-bottom.vue): non copre il contenuto. */
+.slidev-layout {
+  padding-bottom: 1.6rem !important;
+}
+.slidev-layout[data-layout='cover'] {
+  padding-bottom: 1rem !important;
+}
+
+/* Colonne two-cols: la figura riempie l'altezza disponibile. */
+.slidev-layout[data-layout='two-cols'] .grid {
+  align-items: stretch;
+}
+
+/* Il testo di sinistra non deve sfiorare la figura di destra. */
+.slidev-layout.two-columns {
+  column-gap: 2.5rem;
+}
+.slidev-layout.two-columns .col-left {
+  min-width: 0;
+  padding-right: 0.5rem;
+}
+.slidev-layout.two-columns .col-right {
+  min-width: 0;
+}
+
+/* Contenuto dentro FigureShell: tipografia compatta, marker sobri. */
+.slidev-layout .fig-body ul,
+.slidev-layout .fig-body ol {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.slidev-layout .fig-body li {
+  font-size: .92rem;
+  line-height: 1.5;
+}
+.slidev-layout .fig-body li + li {
+  margin-top: .3rem;
+}
+.slidev-layout .fig-footer {
+  font-size: .72rem;
+}
+
+/* Cover: indice + arco del percorso affiancati, senza duplicati. */
+.cover-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  align-items: stretch;
+  min-height: 0;
+  height: 100%;
+}
+@media (min-width: 768px) {
+  .cover-grid {
+    grid-template-columns: 6fr 6fr;
+    gap: 1.6rem;
+  }
+}
+.cover-grid > div {
+  min-height: 0;
+  min-width: 0;
+}
+
+/* Navetta nella colonna di destra (two-cols): versione compatta. */
+.slidev-layout[data-layout='two-cols'] .shuttle {
+  padding: .7rem;
+}
+.slidev-layout[data-layout='two-cols'] .shuttle-head h3 {
+  font-size: 1rem;
+}
+.slidev-layout[data-layout='two-cols'] .shuttle-head .phase {
+  font-size: .75rem;
+}
+.slidev-layout[data-layout='two-cols'] .legend {
+  font-size: .68rem;
+}
+.slidev-layout[data-layout='two-cols'] .loom-wrap {
+  min-height: 180px;
+}
+.slidev-layout[data-layout='two-cols'] .ctrls .picks {
+  font-size: .75rem;
+}
